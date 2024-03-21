@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { IoIosArrowDown } from "react-icons/io";
 import { NavLink, useLocation } from "react-router-dom";
 
+import { RiFunctionLine } from "react-icons/ri";
 import { MdOutlineFeaturedPlayList } from "react-icons/md";
 import { BsBarChartSteps } from "react-icons/bs";
 import { MdDataObject } from "react-icons/md";
@@ -57,6 +58,9 @@ const SubMenu = ({ data, canOpen, checkActives }: any) => {
               className="link !bg-transparent !gap-x-2"
               onClick={() => setClickSubMenu(!clickSubMenu)}
             >
+              {menu === 'Funcionalidades' && (
+                <RiFunctionLine size={10} className="min-w-max" />
+              )}
               {menu === 'Cenários' && (
                 <MdOutlineFeaturedPlayList size={10} className="min-w-max" />
               )}

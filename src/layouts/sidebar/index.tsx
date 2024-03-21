@@ -68,7 +68,7 @@ const Sidebar = () => {
     {
       name: "Automação",
       icon: TbAutomaticGearbox,
-      menus: ["Cenários", "Etapas", "Páginas de Objetos"],
+      menus: ["Funcionalidades", "Cenários", "Etapas", "Páginas de Objetos"],
     },
   ];
 
