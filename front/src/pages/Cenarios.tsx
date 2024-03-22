@@ -1,10 +1,10 @@
-import { Button } from "../components/Button";
+import Button from '@mui/material/Button';
 
 function Cenarios() {
   return (
     <>
       <h1>Automação / Cenários</h1>
-      <Button label='Nova funcionalidade'/>
+      <Button variant="contained">Novo cenário</Button>
     </>
   );
 }

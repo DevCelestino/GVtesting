@@ -8,22 +8,12 @@ function lerFuncionalidades(caminho) {
 
     itens.forEach(item => {
       const itemCaminho = path.join(caminho, item);
+      const itemCaminhoLower = itemCaminho.toLowerCase();
 
       if (item)
         if (fs.statSync(itemCaminho).isDirectory()) {
-          estrutura[item] = lerFuncionalidades(itemCaminho);
-        } else {
-          if (item.toLowerCase().endsWith('.feature')) {
-            estrutura[item] = { 'Caminho': itemCaminho };
-            estrutura[item].Cenarios = lerCenarios(itemCaminho);
-          }
-          if (item.toLowerCase().endsWith('steps.cs')) {
-            estrutura[item] = { 'Caminho': itemCaminho };
-            estrutura[item].Etapas = lerEtapas(itemCaminho);
-          }
-          if (item.toLowerCase().endsWith('pageobjects.cs')) {
-            estrutura[item] = { 'Caminho': itemCaminho };
-            estrutura[item].Objetos = lerObjetosDePagina(itemCaminho);
+          if (!itemCaminhoLower.includes('steps') && !itemCaminhoLower.includes('specs') && !itemCaminhoLower.includes('pageobjects')) {
+            estrutura[item] = lerFuncionalidades(itemCaminho);
           }
         }
     });
@@ -34,6 +24,40 @@ function lerFuncionalidades(caminho) {
     return {};
   }
 }
+
+// function lerFuncionalidades(caminho) {
+//   try {
+//     const estrutura = {};
+//     const itens = fs.readdirSync(caminho);
+
+//     itens.forEach(item => {
+//       const itemCaminho = path.join(caminho, item);
+
+//       if (item)
+//         if (fs.statSync(itemCaminho).isDirectory()) {
+//           estrutura[item] = lerFuncionalidades(itemCaminho);
+//         } else {
+//           if (item.toLowerCase().endsWith('.feature')) {
+//             estrutura[item] = { 'Caminho': itemCaminho };
+//             estrutura[item].Cenarios = lerCenarios(itemCaminho);
+//           }
+//           if (item.toLowerCase().endsWith('steps.cs')) {
+//             estrutura[item] = { 'Caminho': itemCaminho };
+//             estrutura[item].Etapas = lerEtapas(itemCaminho);
+//           }
+//           if (item.toLowerCase().endsWith('pageobjects.cs')) {
+//             estrutura[item] = { 'Caminho': itemCaminho };
+//             estrutura[item].Objetos = lerObjetosDePagina(itemCaminho);
+//           }
+//         }
+//     });
+
+//     return estrutura;
+//   } catch (error) {
+//     console.error('Erro ao ler pastas:', error);
+//     return {};
+//   }
+// }
 
 function lerCenarios(caminho) {
   try {
