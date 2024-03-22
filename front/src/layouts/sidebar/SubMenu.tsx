@@ -54,7 +54,7 @@ const SubMenu = ({ data, canOpen, checkActives }: any) => {
         {data.menus?.map((menu: any) => (
           <li key={menu}>
             <NavLink
-              to={`/${removeAccents(data.name)}/${removeAccents(menu)}`}
+              to={`/${removeAccents(data.name).toLowerCase().replace(' ', '')}/${removeAccents(menu).toLowerCase().replace(' ', '')}`}
               className="link !bg-transparent !gap-x-2"
               onClick={() => setClickSubMenu(!clickSubMenu)}
             >

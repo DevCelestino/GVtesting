@@ -12,15 +12,15 @@ function App() {
   return (
     <RootLayout>
       <Routes>
-        <Route path="/" element={<Navigate to="/Dashboard" />} />
-        <Route path="/Dashboard" element={<Dashboard />} />
-        <Route path="/Automacao" element={<Navigate to="/Automacao/Funcionalidades" />} />
-        <Route path="/Automacao/Funcionalidades" element={<Funcionalidades />} />
-        <Route path="/Automacao/Cenarios" element={<Cenarios />} />
-        <Route path="/Automacao/Etapas" element={<Etapas />} />
-        <Route path="/Automacao/ObjetosDePagina" element={<ObjetosDePagina />} />
-        <Route path="/Configuracoes" element={<Configuracoes />} />
-        <Route path="*" element={<Navigate to="/Dashboard" />} />
+        <Route path="/" element={<Navigate to="/dashboard" />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/automacao" element={<Navigate to="/automacao/funcionalidades" />} />
+        <Route path="/automacao/funcionalidades" element={<Funcionalidades />} />
+        <Route path="/automacao/cenarios" element={<Cenarios />} />
+        <Route path="/automacao/etapas" element={<Etapas />} />
+        <Route path="/automacao/objetosdepagina" element={<ObjetosDePagina />} />
+        <Route path="/configuracoes" element={<Configuracoes />} />
+        <Route path="*" element={<Navigate to="/dashboard" />} />
       </Routes>
     </RootLayout>
   );

@@ -79,7 +79,10 @@ function renderizarFuncionalidades(funcionalidades: IFuncionalidades): JSX.Eleme
           </div>
         )}
         {Object.keys(funcionalidades[key]).length > 0 && (
-          <Button variant="contained" color="warning"><AddIcon /></Button>
+          <div style={{ display: 'flex', justifyContent: 'space-between', gap: '5px' }}>
+            <Button variant="contained" color="warning"><AddIcon /></Button>
+            <Button variant="contained" color="warning"><EditIcon /></Button>
+          </div>
         )}
       </div>
     }>

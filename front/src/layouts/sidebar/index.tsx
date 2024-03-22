@@ -100,7 +100,7 @@ const Sidebar = () => {
           <ul className="whitespace-pre px-2.5 text-[0.9rem] py-5 flex flex-col gap-1  font-medium overflow-x-hidden scrollbar-thin scrollbar-track-white scrollbar-thumb-slate-100   md:h-[68%] h-[70%]">
             <li>
               <NavLink
-                to={"/Dashboard"}
+                to={"/dashboard"}
                 className="link"
                 onClick={() => setReloadSubList(!reloadSubList)}
               >
@@ -120,7 +120,7 @@ const Sidebar = () => {
             </div>
             <li>
               <NavLink
-                to={"/Configuracoes"}
+                to={"/configuracoes"}
                 className="link"
                 onClick={() => setReloadSubList(!reloadSubList)}
               >
