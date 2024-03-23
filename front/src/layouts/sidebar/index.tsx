@@ -9,6 +9,7 @@ import SubMenu from "./SubMenu";
 import { IoIosArrowBack } from "react-icons/io";
 import { TbReportAnalytics } from "react-icons/tb";
 import { TbAutomaticGearbox } from "react-icons/tb";
+import { GoTools } from "react-icons/go";
 import { SlSettings } from "react-icons/sl";
 import { MdMenu } from "react-icons/md";
 
@@ -64,11 +65,19 @@ const Sidebar = () => {
       },
     };
 
-  const subMenusList = [
+  const subMenusAutomacaoList = [
     {
       name: "Automação",
       icon: TbAutomaticGearbox,
       menus: ["Funcionalidades", "Cenários", "Etapas", "Objetos de Página"],
+    },
+  ];
+
+  const subMenusFerramentasList = [
+    {
+      name: "Ferramentas",
+      icon: GoTools,
+      menus: ["Cadastro", "Inscrição"],
     },
   ];
 
@@ -96,27 +105,38 @@ const Sidebar = () => {
           <span className="text-xl whitespace-pre">GVtesting</span>
         </div>
 
-        <div className="flex flex-col  h-full">
+        <div className="flex flex-col  h-full" onClick={() => setReloadSubList(!reloadSubList)}>
           <ul className="whitespace-pre px-2.5 text-[0.9rem] py-5 flex flex-col gap-1  font-medium overflow-x-hidden scrollbar-thin scrollbar-track-white scrollbar-thumb-slate-100   md:h-[68%] h-[70%]">
             <li>
               <NavLink
                 to={"/dashboard"}
                 className="link"
-                onClick={() => setReloadSubList(!reloadSubList)}
               >
                 <TbReportAnalytics size={23} className="min-w-max" />
                 Dashboard
               </NavLink>
             </li>
-            <div
-              className="border-y py-5 border-slate-300 "
-              onClick={() => !open && setOpen(true)}
-            >
-              {subMenusList?.map((menu) => (
-                <div key={menu.name} className="flex flex-col gap-1">
-                  <SubMenu data={menu} canOpen={open} checkActives={reloadSubList}/>
-                </div>
-              ))}
+            <div>
+              <div
+                className="border-y py-5 border-slate-300 "
+                onClick={() => !open && setOpen(true)}
+              >
+                {subMenusAutomacaoList?.map((menu) => (
+                  <div key={menu.name} className="flex flex-col gap-1">
+                    <SubMenu data={menu} canOpen={open} checkActives={reloadSubList} />
+                  </div>
+                ))}
+              </div>
+              <div
+                className="border-y py-5 border-slate-300 "
+                onClick={() => !open && setOpen(true)}
+              >
+                {subMenusFerramentasList?.map((menu) => (
+                  <div key={menu.name} className="flex flex-col gap-1">
+                    <SubMenu data={menu} canOpen={open} checkActives={reloadSubList} />
+                  </div>
+                ))}
+              </div>
             </div>
             <li>
               <NavLink

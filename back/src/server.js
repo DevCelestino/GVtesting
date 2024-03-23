@@ -2,9 +2,10 @@ const cors = require('cors');
 const express = require('express');
 const app = express();
 const funcionalidadesRoute = require('./routes/funcionalidades');
+const { globalEnv } = require('./config');
 
 app.use(cors({
-    origin: 'http://localhost:3000'
+    origin: globalEnv.APP_URL
 }));
 app.use('/api/funcionalidades', funcionalidadesRoute);
 

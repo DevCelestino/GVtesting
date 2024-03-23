@@ -7,6 +7,8 @@ import { RiFunctionLine } from "react-icons/ri";
 import { MdOutlineFeaturedPlayList } from "react-icons/md";
 import { BsBarChartSteps } from "react-icons/bs";
 import { MdDataObject } from "react-icons/md";
+import { MdOutlineContactPage } from "react-icons/md";
+import { GoPersonAdd } from "react-icons/go";
 
 const SubMenu = ({ data, canOpen, checkActives }: any) => {
   const { pathname } = useLocation();
@@ -59,16 +61,22 @@ const SubMenu = ({ data, canOpen, checkActives }: any) => {
               onClick={() => setClickSubMenu(!clickSubMenu)}
             >
               {menu === 'Funcionalidades' && (
-                <RiFunctionLine size={10} className="min-w-max" />
+                <RiFunctionLine size={15} className="min-w-max" />
               )}
               {menu === 'Cenários' && (
-                <MdOutlineFeaturedPlayList size={10} className="min-w-max" />
+                <MdOutlineFeaturedPlayList size={15} className="min-w-max" />
               )}
               {menu === 'Etapas' && (
-                <BsBarChartSteps size={10} className="min-w-max" />
+                <BsBarChartSteps size={15} className="min-w-max" />
               )}
               {menu === 'Objetos de Página' && (
-                <MdDataObject size={10} className="min-w-max" />
+                <MdDataObject size={15} className="min-w-max" />
+              )}
+              {menu === 'Cadastro' && (
+                <MdOutlineContactPage size={15} className="min-w-max" />
+              )}
+              {menu === 'Inscrição' && (
+                <GoPersonAdd size={15} className="min-w-max" />
               )}
               {menu}
             </NavLink>
