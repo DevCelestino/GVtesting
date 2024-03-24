@@ -1,19 +1,18 @@
 import { useEffect, useState, useRef } from "react";
-import { motion } from "framer-motion";
 import { NavLink, useLocation } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
+import { motion } from "framer-motion";
 
-import SubMenu from "./SubMenu";
+import { SubMenu } from "../SubMenu";
 
 // * React icons
 import { IoIosArrowBack } from "react-icons/io";
-import { TbReportAnalytics } from "react-icons/tb";
-import { TbAutomaticGearbox } from "react-icons/tb";
+import { TbReportAnalytics, TbAutomaticGearbox } from "react-icons/tb";
 import { GoTools } from "react-icons/go";
 import { SlSettings } from "react-icons/sl";
 import { MdMenu } from "react-icons/md";
 
-const Sidebar = () => {
+export const Sidebar = () => {
   let isTabletMid = useMediaQuery({ query: "(max-width: 768px)" });
   const [open, setOpen] = useState(isTabletMid ? false : true);
   const [reloadSubList, setReloadSubList] = useState(false);
@@ -93,7 +92,7 @@ const Sidebar = () => {
         variants={Nav_animation}
         initial={{ x: isTabletMid ? -250 : 0 }}
         animate={open ? "open" : "closed"}
-        className=" bg-white text-gray shadow-xl z-[999] max-w-[16rem]  w-[16rem] 
+        className="navbar shadow-xl z-[999] max-w-[16rem]  w-[16rem] 
           overflow-hidden md:relative fixed h-screen"
       >
         <div className="flex items-center gap-3 font-medium border-b py-3 border-slate-300  mx-3">
@@ -179,5 +178,3 @@ const Sidebar = () => {
     </div>
   );
 };
-
-export default Sidebar;

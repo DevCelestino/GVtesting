@@ -1,18 +1,12 @@
-import { useState, useEffect } from "react";
-import { TreeView } from '@mui/x-tree-view';
-import { TreeItem } from '@mui/x-tree-view/TreeItem';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import { createTheme, ThemeProvider } from "@mui/material/styles";
-import type { } from "@mui/x-tree-view/themeAugmentation";
-import AddIcon from '@mui/icons-material/Add';
-import EditIcon from '@mui/icons-material/Edit';
-import { MdOutlineFeaturedPlayList } from "react-icons/md";
-import { Environment } from '../../../shared/env/index';
-import { IconButton, Tooltip } from "@mui/material";
-import { FaRegPlusSquare } from "react-icons/fa";
-import { FaRegMinusSquare } from "react-icons/fa";
 import React from "react";
+import { useState, useEffect } from "react";
+import { TreeView, TreeItem } from '@mui/x-tree-view';
+import { ExpandMore, ChevronRight, Add, Edit } from '@mui/icons-material';
+import type { } from "@mui/x-tree-view/themeAugmentation";
+import { MdOutlineFeaturedPlayList } from "react-icons/md";
+import { IconButton, Tooltip, createTheme, ThemeProvider } from "@mui/material";
+import { FaRegPlusSquare, FaRegMinusSquare } from "react-icons/fa";
+import globalEnv from '../../../config';
 
 const theme = createTheme({
   components: {
@@ -48,7 +42,7 @@ function renderizarFuncionalidades(funcionalidades: IFuncionalidades): JSX.Eleme
             </Tooltip>
             <Tooltip title="Editar funcionalidade">
               <IconButton onClick={handleButtonClick}>
-                <EditIcon />
+                <Edit />
               </IconButton>
             </Tooltip>
           </div>
@@ -57,12 +51,12 @@ function renderizarFuncionalidades(funcionalidades: IFuncionalidades): JSX.Eleme
           <div style={{ display: 'flex', justifyContent: 'space-between', gap: '5px' }}>
             <Tooltip title="Adicionar item ao grupo">
               <IconButton onClick={handleButtonClick}>
-                <AddIcon />
+                <Add />
               </IconButton>
             </Tooltip>
             <Tooltip title="Editar grupo de funcionalidades">
               <IconButton onClick={handleButtonClick}>
-                <EditIcon />
+                <Edit />
               </IconButton>
             </Tooltip>
           </div>
@@ -71,7 +65,7 @@ function renderizarFuncionalidades(funcionalidades: IFuncionalidades): JSX.Eleme
           <div style={{ display: 'flex', justifyContent: 'space-between', gap: '5px' }}>
             <Tooltip title="Adicionar item a aplicação">
               <IconButton onClick={handleButtonClick}>
-                <AddIcon />
+                <Add />
               </IconButton>
             </Tooltip>
           </div>
@@ -87,14 +81,14 @@ function handleButtonClick(event: React.MouseEvent<HTMLButtonElement>) {
   event.stopPropagation();
 }
 
-function Funcionalidades() {
+export const Funcionalidades = () => {
   const [funcionalidades, setFuncionalidades] = useState<IFuncionalidades>({});
   const [expandedItems, setExpandedItems] = React.useState<string[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(`${Environment.API_URL}/api/funcionalidades`);
+        const response = await fetch(`${globalEnv.API_URL}/api/funcionalidades`);
         const jsonData = await response.json();
 
         return jsonData;
@@ -111,23 +105,23 @@ function Funcionalidades() {
       <div className="flex items-center pb-10">
         <h1 className="pr-5">Automação / Funcionalidades</h1>
         <div className="flex justify-between gap-2">
-        <Tooltip title="Expandir todos">
-          <IconButton style={{ color: '#000' }}>
-            <FaRegPlusSquare />
-          </IconButton>
-        </Tooltip>
-        <Tooltip title="Minimizar todos">
-          <IconButton style={{ color: '#000' }}>
-            <FaRegMinusSquare />
-          </IconButton>
-        </Tooltip>
+          <Tooltip title="Expandir todos">
+            <IconButton style={{ color: '#000' }}>
+              <FaRegPlusSquare />
+            </IconButton>
+          </Tooltip>
+          <Tooltip title="Minimizar todos">
+            <IconButton style={{ color: '#000' }}>
+              <FaRegMinusSquare />
+            </IconButton>
+          </Tooltip>
         </div>
       </div>
       <ThemeProvider theme={theme}>
         <TreeView
           aria-label="file system navigator"
-          defaultCollapseIcon={<ExpandMoreIcon />}
-          defaultExpandIcon={<ChevronRightIcon />}
+          defaultCollapseIcon={<ExpandMore />}
+          defaultExpandIcon={<ChevronRight />}
           sx={{ height: '80%', flexGrow: 1, maxWidth: '40rem', minWidth: '25rem' }}
         >
           {renderizarFuncionalidades(funcionalidades)}
@@ -136,5 +130,3 @@ function Funcionalidades() {
     </div>
   );
 }
-
-export default Funcionalidades;

@@ -1,6 +1,6 @@
 import Button from '@mui/material/Button';
 
-function Cenarios() {
+export const Cenarios = () => {
   return (
     <>
       <h1>Automação / Cenários</h1>
@@ -8,5 +8,3 @@ function Cenarios() {
     </>
   );
 }
-
-export default Cenarios;

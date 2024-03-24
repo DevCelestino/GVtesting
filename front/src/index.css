@@ -16,6 +16,42 @@
   }
 }
 
+button.ToggleTheme {
+  background-color: #18191a;
+
+  span {
+    margin: 0px;
+  }
+  svg {
+    color: #f1f1f1;
+  }
+}
+
+button.ToggleTheme:hover {
+  background-color: #3a3c3f;
+}
+
+.navbar {
+  .link.active {
+    background-color: #fee7db;
+  }
+  .link.active, .link.active > p, .link.active > svg {
+    color: #ed6c02;
+  }
+}
+
+button.Mui-selected {
+  color: #ed6c02 !important;
+}
+
+span.MuiTabs-indicator {
+  background-color: #ed6c02;
+}
+
+span.MuiCheckbox-root svg {
+  color: #ed6c02;
+}
+
 .link {
   @apply p-2.5 flex rounded-md gap-6 items-center md:cursor-pointer cursor-default duration-300 font-medium;
 }
@@ -29,14 +65,97 @@
 }
 
 ::-webkit-scrollbar-track {
-  background: #dadada;
+  background: #cccccc;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #afafaf;
+  background: #838383;
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #a2a2a2;
+  background: #636363;
+}
+
+/* Tema Dark */
+.dark {
+  background: #18191a;
+  
+  span, a, p, svg, h1, h2, h3, h4, h5, h6, button {
+    color: #f1f1f1;
+  }
+
+  textarea, input, textarea:focus, input:focus {
+    color: #f1f1f1;
+  }
+
+  button.ToggleTheme {
+    background-color: #f1f1f1;
+  
+    svg {
+      color: #000;
+    }
+  }
+
+  div.MuiPaper-root {
+    background: #3a3c3f;
+
+    li {
+      color: #f1f1f1;
+    }
+  }
+
+  div.MuiFormControl-root.MuiTextField-root {
+    label.MuiInputLabel-root {
+      color: #f1f1f1;
+    }
+
+    div.MuiSelect-select {
+      color: #f1f1f1;
+    }
+
+    div.MuiInputBase-root {
+      background-color: #3a3b3c;
+  
+      fieldset {
+        border-color: #696969;
+      }
+
+      input:-internal-autofill-selected {
+        background-color: #3a3b3c !important;
+      }
+    }
+
+    label:has(+ div > input.Mui-disabled) {
+      color: #646464;
+    }
+  }
+
+  div.MuiFormControl-root.MuiTextField-root:not(:has(input.Mui-disabled)):hover {
+    div.MuiInputBase-root fieldset {
+      border-color: #ababab;
+    }
+  }
+  
+  .navbar {
+    background: #3a3c3f;
+    border-right-width: thin;
+    border-right-color: #3a3c3f;
+  
+    .link.active {
+      background-color: #6a6a6a;
+    }
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #4b4d51;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: #afafaf;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: #a2a2a2;
+  }
 }

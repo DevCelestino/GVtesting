@@ -1,13 +1,16 @@
 import { Button, TextField } from "@mui/material";
-import { InscriçãoTabs } from "./components";
-import PlayArrowIcon from '@mui/icons-material/PlayArrow';
+import { PlayArrow, Save } from '@mui/icons-material';
+import { InscriçãoTabs } from "./Components";
 
-function Inscricao() {
+export const Inscricao = () => {
   return (
     <>
       <div className="flex items-center pb-10">
         <h1 className="pr-5">Ferramentas / Inscrição</h1>
-        <Button variant="contained" color="warning"><PlayArrowIcon className="mr-1"/>Rodar automação</Button>
+        <div className="flex justify-between gap-3">
+          <Button variant="contained" color="warning" className="!font-bold"><PlayArrow className="mr-1" />Rodar automação</Button>
+          <Button variant="contained" color="warning" className="!font-bold"><Save className="mr-1 !w-5" />Salvar</Button>
+        </div>
       </div>
       <TextField
         id="outlined-basic"
@@ -23,5 +26,3 @@ function Inscricao() {
     </>
   );
 }
-
-export default Inscricao;

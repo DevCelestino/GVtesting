@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
-import { IoIosArrowDown } from "react-icons/io";
 import { NavLink, useLocation } from "react-router-dom";
+import { motion } from "framer-motion";
 
+import { IoIosArrowDown } from "react-icons/io";
 import { RiFunctionLine } from "react-icons/ri";
 import { MdOutlineFeaturedPlayList } from "react-icons/md";
 import { BsBarChartSteps } from "react-icons/bs";
@@ -10,7 +10,7 @@ import { MdDataObject } from "react-icons/md";
 import { MdOutlineContactPage } from "react-icons/md";
 import { GoPersonAdd } from "react-icons/go";
 
-const SubMenu = ({ data, canOpen, checkActives }: any) => {
+export const SubMenu = ({ data, canOpen, checkActives }: any) => {
   const { pathname } = useLocation();
   const [subMenuOpen, setSubMenuOpen] = useState(true);
   const [clickSubMenu, setClickSubMenu] = useState(false);
@@ -90,5 +90,3 @@ const SubMenu = ({ data, canOpen, checkActives }: any) => {
 function removeAccents(str: string) {
   return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s/g, "");
 }
-
-export default SubMenu;
