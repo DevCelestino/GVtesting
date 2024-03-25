@@ -34,18 +34,47 @@ interface IInscricaoData {
 }
 
 const FormatarCPF = (value: string) => {
+  let cleanedValue = value.replaceAll('.', '').replaceAll('-', '');
+
   let cpf = '';
 
-  for (let i = 0; i < value.length; i++) {
+  for (let i = 0; i < cleanedValue.length; i++) {
     if (i === 3 || i === 6) {
       cpf += '.';
     } else if (i === 9) {
       cpf += '-';
     }
-    cpf += value.charAt(i);
+    cpf += cleanedValue.charAt(i);
   }
 
   return cpf;
+}
+
+const FormatarTelefone = (value: string) => {
+  let cleanedValue = value.replaceAll('(', '').replaceAll(')', '').replaceAll(' ', '').replaceAll('-', '');
+
+  let telefone = '';
+
+  if (cleanedValue.length === 10) {
+    telefone = cleanedValue.replace(/(\d{2})(\d{0,4})(\d{0,4})/, '($1) $2-$3');
+  } else if (cleanedValue.length === 11) {
+    telefone = cleanedValue.replace(/(\d{2})(\d{0,5})(\d{0,4})/, '($1) $2-$3');
+  } else {
+    for (let i = 0; i < cleanedValue.length; i++) {
+      if (i === 0) {
+        telefone += '(';
+      }
+      if (i === 2) {
+        telefone += ') ';
+      }
+      if (i === 6) {
+        telefone += '-';
+      }
+      telefone += cleanedValue.charAt(i);
+    }
+  }
+
+  return telefone;
 }
 
 export const FormaDeIngressoForm: React.FC<IProps> = ({ inscricaoData }) => {
@@ -57,8 +86,9 @@ export const FormaDeIngressoForm: React.FC<IProps> = ({ inscricaoData }) => {
   const [eMail, setEMail] = useState(inscricaoData.FormaDeIngresso.EMail.Valor);
   const [randomizarEMail, setRandomizarEMail] = useState(inscricaoData.FormaDeIngresso.EMail.Randomizar);
   const [validEMail, setValidEMail] = useState(true);
-  const [telefone, setTelefone] = useState(inscricaoData.FormaDeIngresso.Telefone.Valor);
+  const [telefone, setTelefone] = useState(FormatarTelefone(inscricaoData.FormaDeIngresso.Telefone.Valor));
   const [randomizarTelefone, setRandomizarTelefone] = useState(inscricaoData.FormaDeIngresso.Telefone.Randomizar);
+  const [validTelefone, setValidTelefone] = useState(true);
 
   const tipoDocumentos = [
     {
@@ -90,7 +120,7 @@ export const FormaDeIngressoForm: React.FC<IProps> = ({ inscricaoData }) => {
   };
 
   const handleDocumentoChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    let value = event.target.value.replace(/\D/g, '');
+    let value = event.target.value.replaceAll(/\D/g, '');
 
     inscricaoData.FormaDeIngresso.Documento.Valor = event.target.value;
 
@@ -112,14 +142,14 @@ export const FormaDeIngressoForm: React.FC<IProps> = ({ inscricaoData }) => {
   };
 
   const handleNomeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    let nome = event.target.value.replace(/[^\w\sÀ-ÖØ-öø-ÿ]+/g, '').replace(/\d/g, '').trimStart();
+    let nome = event.target.value.replaceAll(/[^\w\sÀ-ÖØ-öø-ÿ]+/g, '').replaceAll(/\d/g, '');
 
     inscricaoData.FormaDeIngresso.Nome.Valor = nome;
     setNome(nome);
   };
 
   const handleNomeBlur = (event: React.FocusEvent<HTMLInputElement>) => {
-    let nome = event.target.value.replace(/ {2,}/g, ' ').trimEnd();
+    let nome = event.target.value.replaceAll(/ {2,}/g, ' ').trimStart().trimEnd();
 
     inscricaoData.FormaDeIngresso.Nome.Valor = nome;
     setNome(nome);
@@ -137,7 +167,7 @@ export const FormaDeIngressoForm: React.FC<IProps> = ({ inscricaoData }) => {
   };
 
   const handleEMailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    let email = event.target.value.replace(/\s/g, '').trimStart();
+    let email = event.target.value.replaceAll(/\s/g, '').trimStart();
 
     inscricaoData.FormaDeIngresso.EMail.Valor = email;
     setEMail(email);
@@ -156,6 +186,7 @@ export const FormaDeIngressoForm: React.FC<IProps> = ({ inscricaoData }) => {
   const handleRandomizarTelefoneChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.checked) {
       setTelefone('');
+      setValidTelefone(true);
       inscricaoData.FormaDeIngresso.Telefone.Valor = '';
     }
 
@@ -164,10 +195,18 @@ export const FormaDeIngressoForm: React.FC<IProps> = ({ inscricaoData }) => {
   };
 
   const handleTelefoneChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    let telefone = event.target.value.replace(/\s/g, '').trimStart();
-    
+    let telefone = event.target.value.replaceAll(/\D/g, '');
+
     inscricaoData.FormaDeIngresso.Telefone.Valor = telefone;
-    setTelefone(telefone);
+    setTelefone(FormatarTelefone(telefone));
+  };
+
+  const handlTelefoneBlur = (event: React.FocusEvent<HTMLInputElement>) => {
+    const telefone = event.target.value;
+    const telefonePattern10 = /^\(\d{2}\) \d{4}-\d{4}$/;
+    const telefonePattern11 = /^\(\d{2}\) \d{5}-\d{4}$/;
+
+    setValidTelefone(telefonePattern10.test(telefone) || telefonePattern11.test(telefone) || telefone === '')
   };
 
   return (
@@ -226,7 +265,6 @@ export const FormaDeIngressoForm: React.FC<IProps> = ({ inscricaoData }) => {
                 ? '000.000.000-00'
                 : ''
             }
-            defaultValue=''
             autoComplete="off"
             fullWidth
           />
@@ -259,7 +297,6 @@ export const FormaDeIngressoForm: React.FC<IProps> = ({ inscricaoData }) => {
             label="Nome"
             variant="outlined"
             placeholder='João da Silva'
-            defaultValue=''
             autoComplete="off"
             fullWidth
           />
@@ -294,7 +331,6 @@ export const FormaDeIngressoForm: React.FC<IProps> = ({ inscricaoData }) => {
             label="E-Mail"
             variant="outlined"
             placeholder='exemplo@exemplo.com'
-            defaultValue=''
             autoComplete="off"
             fullWidth
           />
@@ -318,18 +354,30 @@ export const FormaDeIngressoForm: React.FC<IProps> = ({ inscricaoData }) => {
             alignItems: 'center'
           }}
         >
-          <TextField
-            disabled={randomizarTelefone}
-            value={telefone}
-            onChange={handleTelefoneChange}
-            id="telefone"
-            label="Telefone"
-            variant="outlined"
-            placeholder='(11) 99999-9999'
-            defaultValue=''
-            autoComplete="off"
-            fullWidth
-          />
+          <div style={{ position: 'relative' }}>
+            <TextField
+              disabled={randomizarTelefone}
+              value={telefone}
+              onChange={handleTelefoneChange}
+              onBlur={handlTelefoneBlur}
+              inputProps={{ maxLength: 15 }}
+              id="telefone"
+              label="Telefone"
+              variant="outlined"
+              placeholder='(11) 99999-9999'
+              autoComplete="off"
+              fullWidth
+            />
+            {!validTelefone && (<span style={{
+              position: 'absolute',
+              left: '0',
+              bottom: '-20px',
+              color: '#ff4242',
+              fontSize: '10px'
+            }}>
+              Por favor, digite um telefone válido.
+            </span>)}
+          </div>
           <FormControlLabel
             control={
               <Checkbox
@@ -350,6 +398,6 @@ export const FormaDeIngressoForm: React.FC<IProps> = ({ inscricaoData }) => {
           }}
         />
       </div>
-    </FormGroup>
+    </FormGroup >
   );
 }
