@@ -73,19 +73,26 @@ export const FormaDeIngressoForm: React.FC<IProps> = ({ inscricaoData }) => {
 
   const handleTipoDocumentoChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setDocumento('');
+    inscricaoData.FormaDeIngresso.Documento.Valor = '';
+
+    inscricaoData.FormaDeIngresso.TipoDeDocumento = event.target.value;
     setTipoDocumento(event.target.value);
   };
 
   const handleRandomizarDocumentoChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.checked) {
       setDocumento('');
+      inscricaoData.FormaDeIngresso.Documento.Valor = '';
     }
 
+    inscricaoData.FormaDeIngresso.Documento.Randomizar = event.target.checked;
     setRandomizarDocumento(event.target.checked);
   };
 
   const handleDocumentoChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     let value = event.target.value.replace(/\D/g, '');
+
+    inscricaoData.FormaDeIngresso.Documento.Valor = event.target.value;
 
     if (tipoDocumento === 'CPF') {
       value = FormatarCPF(value);
@@ -97,50 +104,70 @@ export const FormaDeIngressoForm: React.FC<IProps> = ({ inscricaoData }) => {
   const handleRandomizarNomeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.checked) {
       setNome('');
+      inscricaoData.FormaDeIngresso.Nome.Valor = '';
     }
 
+    inscricaoData.FormaDeIngresso.Nome.Randomizar = event.target.checked;
     setRandomizarNome(event.target.checked);
   };
 
   const handleNomeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setNome(event.target.value.replace(/[^\w\sÀ-ÖØ-öø-ÿ]+/g, '').replace(/\d/g, '').trimStart());
+    let nome = event.target.value.replace(/[^\w\sÀ-ÖØ-öø-ÿ]+/g, '').replace(/\d/g, '').trimStart();
+
+    inscricaoData.FormaDeIngresso.Nome.Valor = nome;
+    setNome(nome);
   };
 
   const handleNomeBlur = (event: React.FocusEvent<HTMLInputElement>) => {
-    setNome(event.target.value.replace(/ {2,}/g, ' ').trimEnd());
+    let nome = event.target.value.replace(/ {2,}/g, ' ').trimEnd();
+
+    inscricaoData.FormaDeIngresso.Nome.Valor = nome;
+    setNome(nome);
   };
 
   const handleRandomizarEMailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.checked) {
       setEMail('');
+      inscricaoData.FormaDeIngresso.EMail.Valor = '';
       setValidEMail(true);
     }
 
+    inscricaoData.FormaDeIngresso.EMail.Randomizar = event.target.checked;
     setRandomizarEMail(event.target.checked);
   };
 
   const handleEMailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setEMail(event.target.value.replace(/\s/g, '').trimStart());
+    let email = event.target.value.replace(/\s/g, '').trimStart();
+
+    inscricaoData.FormaDeIngresso.EMail.Valor = email;
+    setEMail(email);
   };
 
   const handleEMailBlur = (event: React.FocusEvent<HTMLInputElement>) => {
-    const value = event.target.value.trimEnd();
+    const email = event.target.value.trimEnd();
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-    setValidEMail(emailPattern.test(value))
-    setEMail(value);
+    setValidEMail(emailPattern.test(email))
+
+    inscricaoData.FormaDeIngresso.EMail.Valor = email;
+    setEMail(email);
   };
 
   const handleRandomizarTelefoneChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.checked) {
       setTelefone('');
+      inscricaoData.FormaDeIngresso.Telefone.Valor = '';
     }
 
+    inscricaoData.FormaDeIngresso.Telefone.Randomizar = event.target.checked;
     setRandomizarTelefone(event.target.checked);
   };
 
   const handleTelefoneChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setTelefone(event.target.value.replace(/\s/g, '').trimStart());
+    let telefone = event.target.value.replace(/\s/g, '').trimStart();
+    
+    inscricaoData.FormaDeIngresso.Telefone.Valor = telefone;
+    setTelefone(telefone);
   };
 
   return (
