@@ -1,5 +1,5 @@
 import { Checkbox, FormControlLabel, FormGroup, MenuItem, TextField } from '@mui/material';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 interface IProps {
   inscricaoData: IInscricaoData;
@@ -80,6 +80,7 @@ const FormatarTelefone = (value: string) => {
 export const FormaDeIngressoForm: React.FC<IProps> = ({ inscricaoData }) => {
   const [tipoDocumento, setTipoDocumento] = useState(inscricaoData.FormaDeIngresso.TipoDeDocumento);
   const [documento, setDocumento] = useState(FormatarCPF(inscricaoData.FormaDeIngresso.Documento.Valor));
+  const [validDocumento, setValidDocumento] = useState(true);
   const [randomizarDocumento, setRandomizarDocumento] = useState(inscricaoData.FormaDeIngresso.Documento.Randomizar);
   const [nome, setNome] = useState(inscricaoData.FormaDeIngresso.Nome.Valor);
   const [randomizarNome, setRandomizarNome] = useState(inscricaoData.FormaDeIngresso.Nome.Randomizar);
@@ -100,6 +101,12 @@ export const FormaDeIngressoForm: React.FC<IProps> = ({ inscricaoData }) => {
       label: 'Registro nacional de estrangeiros',
     },
   ];
+
+  useEffect(() => {
+    validateDocumento(documento);
+    validateEMail(eMail);
+    validateTelefone(telefone);
+  }, []);
 
   const handleTipoDocumentoChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setDocumento('');
@@ -131,6 +138,18 @@ export const FormaDeIngressoForm: React.FC<IProps> = ({ inscricaoData }) => {
     setDocumento(value);
   };
 
+  const validateDocumento = (documento: string) => {
+    let documentoPattern: RegExp;
+
+    if (tipoDocumento === 'CPF') {
+      documentoPattern = /^(\d{3}\.){2}\d{3}-\d{2}$/;
+    } else {
+      documentoPattern = /^\d+$/;
+    }
+
+    setValidDocumento(documentoPattern.test(documento) || documento === '');
+  };
+
   const handleRandomizarNomeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.checked) {
       setNome('');
@@ -142,7 +161,7 @@ export const FormaDeIngressoForm: React.FC<IProps> = ({ inscricaoData }) => {
   };
 
   const handleNomeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    let nome = event.target.value.replaceAll(/[^\w\sÀ-ÖØ-öø-ÿ]+/g, '').replaceAll(/\d/g, '');
+    let nome = event.target.value.replaceAll(/[^\w\sÀ-ÖØ-öø-ÿ]+/g, '');
 
     inscricaoData.FormaDeIngresso.Nome.Valor = nome;
     setNome(nome);
@@ -167,20 +186,25 @@ export const FormaDeIngressoForm: React.FC<IProps> = ({ inscricaoData }) => {
   };
 
   const handleEMailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    let email = event.target.value.replaceAll(/\s/g, '').trimStart();
+    let email = event.target.value.replaceAll(/(?<=\S)\s/g, '');
 
     inscricaoData.FormaDeIngresso.EMail.Valor = email;
     setEMail(email);
   };
 
   const handleEMailBlur = (event: React.FocusEvent<HTMLInputElement>) => {
-    const email = event.target.value.trimEnd();
-    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const email = event.target.value.trimStart().trimEnd();
 
-    setValidEMail(emailPattern.test(email))
+    validateEMail(email);
 
     inscricaoData.FormaDeIngresso.EMail.Valor = email;
     setEMail(email);
+  };
+
+  const validateEMail = (email: string) => {
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    setValidEMail(emailPattern.test(email) || eMail === '')
   };
 
   const handleRandomizarTelefoneChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -201,8 +225,7 @@ export const FormaDeIngressoForm: React.FC<IProps> = ({ inscricaoData }) => {
     setTelefone(FormatarTelefone(telefone));
   };
 
-  const handlTelefoneBlur = (event: React.FocusEvent<HTMLInputElement>) => {
-    const telefone = event.target.value;
+  const validateTelefone = (telefone: string) => {
     const telefonePattern10 = /^\(\d{2}\) \d{4}-\d{4}$/;
     const telefonePattern11 = /^\(\d{2}\) \d{5}-\d{4}$/;
 
@@ -248,26 +271,39 @@ export const FormaDeIngressoForm: React.FC<IProps> = ({ inscricaoData }) => {
             alignItems: 'center'
           }}
         >
-          <TextField
-            disabled={randomizarDocumento}
-            value={documento}
-            onChange={handleDocumentoChange}
-            inputProps={
-              tipoDocumento === 'CPF'
-                ? { maxLength: 14 }
-                : {}
-            }
-            id="documento"
-            label="Documento"
-            variant="outlined"
-            placeholder={
-              tipoDocumento === 'CPF'
-                ? '000.000.000-00'
-                : ''
-            }
-            autoComplete="off"
-            fullWidth
-          />
+          <div style={{ position: 'relative' }}>
+            <TextField
+              disabled={randomizarDocumento}
+              value={documento}
+              onChange={handleDocumentoChange}
+              onBlur={() => validateDocumento(documento)}
+              inputProps={
+                tipoDocumento === 'CPF'
+                  ? { maxLength: 14 }
+                  : {}
+              }
+              id="documento"
+              label="Documento"
+              variant="outlined"
+              placeholder={
+                tipoDocumento === 'CPF'
+                  ? '000.000.000-00'
+                  : ''
+              }
+              autoComplete="off"
+              error={!validDocumento}
+              fullWidth
+            />
+            {!validDocumento && (<span style={{
+              position: 'absolute',
+              left: '0',
+              bottom: '-20px',
+              color: '#ff4242',
+              fontSize: '10px'
+            }}>
+              Por favor, digite um documento válido.
+            </span>)}
+          </div>
           <FormControlLabel
             control={
               <Checkbox
@@ -322,18 +358,30 @@ export const FormaDeIngressoForm: React.FC<IProps> = ({ inscricaoData }) => {
             alignItems: 'center'
           }}
         >
-          <TextField
-            disabled={randomizarEMail}
-            value={eMail}
-            onChange={handleEMailChange}
-            onBlur={handleEMailBlur}
-            id="email"
-            label="E-Mail"
-            variant="outlined"
-            placeholder='exemplo@exemplo.com'
-            autoComplete="off"
-            fullWidth
-          />
+          <div style={{ position: 'relative' }}>
+            <TextField
+              disabled={randomizarEMail}
+              value={eMail}
+              onChange={handleEMailChange}
+              onBlur={handleEMailBlur}
+              id="email"
+              label="E-Mail"
+              variant="outlined"
+              placeholder='exemplo@exemplo.com'
+              error={!validEMail}
+              autoComplete="off"
+              fullWidth
+            />
+            {!validEMail && (<span style={{
+              position: 'absolute',
+              left: '0',
+              bottom: '-20px',
+              color: '#ff4242',
+              fontSize: '10px'
+            }}>
+              Por favor, digite um e-mail válido.
+            </span>)}
+          </div>
           <FormControlLabel
             control={
               <Checkbox
@@ -359,12 +407,13 @@ export const FormaDeIngressoForm: React.FC<IProps> = ({ inscricaoData }) => {
               disabled={randomizarTelefone}
               value={telefone}
               onChange={handleTelefoneChange}
-              onBlur={handlTelefoneBlur}
+              onBlur={() => validateTelefone(telefone)}
               inputProps={{ maxLength: 15 }}
               id="telefone"
               label="Telefone"
               variant="outlined"
               placeholder='(11) 99999-9999'
+              error={!validTelefone}
               autoComplete="off"
               fullWidth
             />
