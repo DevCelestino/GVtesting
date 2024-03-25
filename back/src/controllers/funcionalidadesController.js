@@ -25,6 +25,8 @@ function lerFuncionalidades(caminho) {
   }
 }
 
+module.exports = lerFuncionalidades;
+
 // function lerFuncionalidades(caminho) {
 //   try {
 //     const estrutura = {};
@@ -59,58 +61,56 @@ function lerFuncionalidades(caminho) {
 //   }
 // }
 
-function lerCenarios(caminho) {
-  try {
-    const conteudo = fs.readFileSync(caminho, 'utf-8');
-    const linhas = conteudo.split('\r\n');
-    const cenarios = linhas
-      .filter(linha => linha.includes('Cenário: '))
-      .map(linha => linha.replace('Cenário: ', ''));
+// function lerCenarios(caminho) {
+//   try {
+//     const conteudo = fs.readFileSync(caminho, 'utf-8');
+//     const linhas = conteudo.split('\r\n');
+//     const cenarios = linhas
+//       .filter(linha => linha.includes('Cenário: '))
+//       .map(linha => linha.replace('Cenário: ', ''));
 
-    return cenarios;
-  } catch (error) {
-    console.error('Erro ao ler o arquivo feature:', error);
-    return {};
-  }
-}
+//     return cenarios;
+//   } catch (error) {
+//     console.error('Erro ao ler o arquivo feature:', error);
+//     return {};
+//   }
+// }
 
-function lerEtapas(caminho) {
-  try {
-    const conteudo = fs.readFileSync(caminho, 'utf-8');
-    const linhas = conteudo.split('\r\n');
-    const etapas = linhas
-      .filter(linha => linha.includes('[Given(') || linha.includes('[When(') || linha.includes('[Then('))
-      .map(linha => linha.trimStart());
+// function lerEtapas(caminho) {
+//   try {
+//     const conteudo = fs.readFileSync(caminho, 'utf-8');
+//     const linhas = conteudo.split('\r\n');
+//     const etapas = linhas
+//       .filter(linha => linha.includes('[Given(') || linha.includes('[When(') || linha.includes('[Then('))
+//       .map(linha => linha.trimStart());
 
-    return etapas;
-  } catch (error) {
-    console.error('Erro ao ler o arquivo de steps:', error);
-    return {};
-  }
-}
+//     return etapas;
+//   } catch (error) {
+//     console.error('Erro ao ler o arquivo de steps:', error);
+//     return {};
+//   }
+// }
 
-function lerObjetosDePagina(caminho) {
-  try {
-    const conteudo = fs.readFileSync(caminho, 'utf-8');
-    const linhas = conteudo.split('\r\n');
-    const objetos = [];
+// function lerObjetosDePagina(caminho) {
+//   try {
+//     const conteudo = fs.readFileSync(caminho, 'utf-8');
+//     const linhas = conteudo.split('\r\n');
+//     const objetos = [];
 
-    for (let i = 0; i < linhas.length; i++) {
-      const linhaAtual = linhas[i];
+//     for (let i = 0; i < linhas.length; i++) {
+//       const linhaAtual = linhas[i];
 
-      if (linhaAtual.includes('[FindsBy')) {
-        const novaString = (linhaAtual + '\r\n' + linhas[i + 1])
-          .trimStart()
-          .replace(/\r\n\s*public/g, '\r\npublic');
-        objetos.push(novaString);
-      }
-    }
+//       if (linhaAtual.includes('[FindsBy')) {
+//         const novaString = (linhaAtual + '\r\n' + linhas[i + 1])
+//           .trimStart()
+//           .replace(/\r\n\s*public/g, '\r\npublic');
+//         objetos.push(novaString);
+//       }
+//     }
 
-    return objetos;
-  } catch (error) {
-    console.error('Erro ao ler o arquivo de pageobjects:', error);
-    return {};
-  }
-}
-
-module.exports = lerFuncionalidades;
+//     return objetos;
+//   } catch (error) {
+//     console.error('Erro ao ler o arquivo de pageobjects:', error);
+//     return {};
+//   }
+// }

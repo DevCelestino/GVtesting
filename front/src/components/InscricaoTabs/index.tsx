@@ -1,6 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Tabs, Tab, Typography, Box } from '@mui/material';
 import { FormaDeIngressoForm } from '../FormaDeIngressoForm';
+
+interface IProps {
+  tabs: string[],
+  inscricaoData: IInscricaoData
+}
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -8,12 +13,37 @@ interface TabPanelProps {
   value: number;
 }
 
-interface IProps {
-  tabs: string[]
+interface IInscricaoData {
+  URL: string;
+  FormaDeIngresso: {
+    Ativo: boolean;
+    TipoDeDocumento: string;
+    Documento: {
+      Valor: string;
+      Ativo: boolean;
+      Randomizar: boolean;
+    };
+    Nome: {
+      Valor: string;
+      Ativo: boolean;
+      Randomizar: boolean;
+    };
+    EMail: {
+      Valor: string;
+      Ativo: boolean;
+      Randomizar: boolean;
+    };
+    Telefone: {
+      Valor: string;
+      Ativo: boolean;
+      Randomizar: boolean;
+    };
+  };
 }
 
 export const InscriçãoTabs: React.FC<IProps> = ({
-  tabs
+  tabs,
+  inscricaoData
 }) => {
   function CustomTabPanel(props: TabPanelProps) {
     const { children, value, index, ...other } = props;
@@ -59,7 +89,7 @@ export const InscriçãoTabs: React.FC<IProps> = ({
       </Box>
       {tabs.map((tab, index) => (
         <CustomTabPanel value={value} index={index}>
-          {tab === 'Forma de Ingresso' && (<FormaDeIngressoForm />)}
+          {tab === 'Forma de Ingresso' && (<FormaDeIngressoForm inscricaoData={inscricaoData} />)}
         </CustomTabPanel>
       ))}
     </>

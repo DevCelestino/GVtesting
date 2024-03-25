@@ -4,8 +4,12 @@ const lerFuncionalidades = require('../controllers/funcionalidadesController.js'
 const { globalEnv } = require('../config');
 
 router.get('/', (req, res) => {
-    const estrutura = lerFuncionalidades(globalEnv.PATH_TESTES);
-    res.send(estrutura);
+    try {
+        const estrutura = lerFuncionalidades(globalEnv.PATH_TESTES);
+        res.send(estrutura);
+    } catch {
+        res.status(500).send('Erro interno do servidor');
+    }
 });
 
 module.exports = router;

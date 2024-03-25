@@ -1,40 +1,12 @@
-import { useEffect, useState } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 import { RootLayout } from "./layouts/RootLayout";
 import { Dashboard, Funcionalidades, Cenarios, Etapas, ObjetosDePagina, Cadastro, Inscricao, Configuracoes } from "./pages";
-import { Button } from "@mui/material";
-import { Brightness4, Brightness7 } from '@mui/icons-material';
+import { ThemeButton } from "./components";
 
 function App() {
-  const [darkMode, setDarkMode] = useState(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
-
-  const toggleDarkMode = () => {
-    setDarkMode(!darkMode);
-  };
-
-  useEffect(() => {
-    if (darkMode) {
-      document.body.classList.add('dark');
-    } else {
-      document.body.classList.remove('dark');
-    }
-  }, [darkMode]);
-
   return (
     <>
-      <Button
-        className="!absolute bottom-5 right-5 ToggleTheme"
-        style={{
-          minWidth: '50px',
-          minHeight: '50px'
-        }}
-        onClick={toggleDarkMode}
-        startIcon={
-          darkMode
-            ? <Brightness7 />
-            : <Brightness4 />
-        }
-      />
+      <ThemeButton />
       <RootLayout>
         <Routes>
           <Route path="/" element={<Navigate to="/dashboard" />} />

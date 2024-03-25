@@ -1,4 +1,4 @@
-import { Sidebar } from "./Components";
+import { Sidebar } from "../components";
 
 export const RootLayout = ({ children }: any) => {
   return (

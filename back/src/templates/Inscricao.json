@@ -1,0 +1,27 @@
+{
+  "URL": "",
+  "FormaDeIngresso": {
+    "Ativo": "true",
+    "TipoDeDocumento": "CPF",
+    "Documento": {
+      "Valor": "",
+      "Ativo": "true",
+      "Randomizar": "true"
+    },
+    "Nome": {
+      "Valor": "",
+      "Ativo": "true",
+      "Randomizar": "true"
+    },
+    "EMail": {
+      "Valor": "",
+      "Ativo": "true",
+      "Randomizar": "true"
+    },
+    "Telefone": {
+      "Valor": "",
+      "Ativo": "true",
+      "Randomizar": "true"
+    }
+  }
+}

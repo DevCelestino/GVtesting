@@ -1,17 +1,64 @@
 import { Checkbox, FormControlLabel, FormGroup, MenuItem, TextField } from '@mui/material';
 import { useState } from 'react';
 
-export function FormaDeIngressoForm() {
-  const [tipoDocumento, setTipoDocumento] = useState('CPF');
-  const [randomizarDocumento, setRandomizarDocumento] = useState(true);
-  const [nome, setNome] = useState('');
-  const [randomizarNome, setRandomizarNome] = useState(true);
-  const [eMail, setEMail] = useState('');
+interface IProps {
+  inscricaoData: IInscricaoData;
+}
+
+interface IInscricaoData {
+  URL: string;
+  FormaDeIngresso: {
+    Ativo: boolean;
+    TipoDeDocumento: string;
+    Documento: {
+      Valor: string;
+      Ativo: boolean;
+      Randomizar: boolean;
+    };
+    Nome: {
+      Valor: string;
+      Ativo: boolean;
+      Randomizar: boolean;
+    };
+    EMail: {
+      Valor: string;
+      Ativo: boolean;
+      Randomizar: boolean;
+    };
+    Telefone: {
+      Valor: string;
+      Ativo: boolean;
+      Randomizar: boolean;
+    };
+  };
+}
+
+const FormatarCPF = (value: string) => {
+  let cpf = '';
+
+  for (let i = 0; i < value.length; i++) {
+    if (i === 3 || i === 6) {
+      cpf += '.';
+    } else if (i === 9) {
+      cpf += '-';
+    }
+    cpf += value.charAt(i);
+  }
+
+  return cpf;
+}
+
+export const FormaDeIngressoForm: React.FC<IProps> = ({ inscricaoData }) => {
+  const [tipoDocumento, setTipoDocumento] = useState(inscricaoData.FormaDeIngresso.TipoDeDocumento);
+  const [documento, setDocumento] = useState(FormatarCPF(inscricaoData.FormaDeIngresso.Documento.Valor));
+  const [randomizarDocumento, setRandomizarDocumento] = useState(inscricaoData.FormaDeIngresso.Documento.Randomizar);
+  const [nome, setNome] = useState(inscricaoData.FormaDeIngresso.Nome.Valor);
+  const [randomizarNome, setRandomizarNome] = useState(inscricaoData.FormaDeIngresso.Nome.Randomizar);
+  const [eMail, setEMail] = useState(inscricaoData.FormaDeIngresso.EMail.Valor);
+  const [randomizarEMail, setRandomizarEMail] = useState(inscricaoData.FormaDeIngresso.EMail.Randomizar);
   const [validEMail, setValidEMail] = useState(true);
-  const [randomizarEMail, setRandomizarEMail] = useState(true);
-  const [telefone, setTelefone] = useState('');
-  const [randomizarTelefone, setRandomizarTelefone] = useState(true);
-  const [documento, setDocumento] = useState('');
+  const [telefone, setTelefone] = useState(inscricaoData.FormaDeIngresso.Telefone.Valor);
+  const [randomizarTelefone, setRandomizarTelefone] = useState(inscricaoData.FormaDeIngresso.Telefone.Randomizar);
 
   const tipoDocumentos = [
     {
@@ -41,18 +88,7 @@ export function FormaDeIngressoForm() {
     let value = event.target.value.replace(/\D/g, '');
 
     if (tipoDocumento === 'CPF') {
-      let cpf = '';
-
-      for (let i = 0; i < value.length; i++) {
-        if (i === 3 || i === 6) {
-          cpf += '.';
-        } else if (i === 9) {
-          cpf += '-';
-        }
-        cpf += value.charAt(i);
-      }
-
-      value = cpf;
+      value = FormatarCPF(value);
     }
 
     setDocumento(value);
@@ -164,6 +200,7 @@ export function FormaDeIngressoForm() {
                 : ''
             }
             defaultValue=''
+            autoComplete="off"
             fullWidth
           />
           <FormControlLabel
@@ -196,6 +233,7 @@ export function FormaDeIngressoForm() {
             variant="outlined"
             placeholder='João da Silva'
             defaultValue=''
+            autoComplete="off"
             fullWidth
           />
           <FormControlLabel
@@ -230,6 +268,7 @@ export function FormaDeIngressoForm() {
             variant="outlined"
             placeholder='exemplo@exemplo.com'
             defaultValue=''
+            autoComplete="off"
             fullWidth
           />
           <FormControlLabel
@@ -261,6 +300,7 @@ export function FormaDeIngressoForm() {
             variant="outlined"
             placeholder='(11) 99999-9999'
             defaultValue=''
+            autoComplete="off"
             fullWidth
           />
           <FormControlLabel
