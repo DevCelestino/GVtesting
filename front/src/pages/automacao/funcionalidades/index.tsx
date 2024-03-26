@@ -103,7 +103,7 @@ export const Funcionalidades = () => {
   return (
     <div>
       <div className="flex items-center pb-10">
-        <h1 className="pr-5">Automação / Funcionalidades</h1>
+        <h1 className="pr-5" style={{ fontSize: '1.5rem', fontWeight: 'bolder' }}>Automação / Funcionalidades</h1>
         <div className="flex justify-between gap-2">
           <Tooltip title="Expandir todos">
             <IconButton style={{ color: '#000' }}>

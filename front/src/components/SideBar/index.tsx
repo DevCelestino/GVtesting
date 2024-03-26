@@ -105,8 +105,10 @@ export const Sidebar = () => {
         </div>
 
         <div className="flex flex-col  h-full" onClick={() => setReloadSubList(!reloadSubList)}>
-          <ul className="whitespace-pre px-2.5 text-[0.9rem] py-5 flex flex-col gap-1  font-medium overflow-x-hidden scrollbar-thin scrollbar-track-white scrollbar-thumb-slate-100   md:h-[68%] h-[70%]">
-            <li>
+          <ul className="whitespace-pre px-2.5 text-[0.9rem] py-2.5 flex flex-col gap-1  font-medium overflow-x-hidden md:h-[68%] h-[70%]">
+            <li
+              className="pb-2.5"
+            >
               <NavLink
                 to={"/dashboard"}
                 className="link"
@@ -117,7 +119,7 @@ export const Sidebar = () => {
             </li>
             <div>
               <div
-                className="border-y py-5 border-slate-300 "
+                className="pt-2.5 pb-2 border-y border-slate-300 "
                 onClick={() => !open && setOpen(true)}
               >
                 {subMenusAutomacaoList?.map((menu) => (
@@ -127,7 +129,7 @@ export const Sidebar = () => {
                 ))}
               </div>
               <div
-                className="border-y py-5 border-slate-300 "
+                className="pt-2.5 pb-2 border-b border-slate-300 "
                 onClick={() => !open && setOpen(true)}
               >
                 {subMenusFerramentasList?.map((menu) => (
@@ -137,7 +139,9 @@ export const Sidebar = () => {
                 ))}
               </div>
             </div>
-            <li>
+            <li
+              className="pt-2.5"
+            >
               <NavLink
                 to={"/configuracoes"}
                 className="link"

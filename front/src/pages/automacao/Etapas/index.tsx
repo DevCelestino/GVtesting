@@ -1,5 +1,5 @@
 export const Etapas = () => {
   return (
-    <h1>Automação / Etapas</h1>
+    <h1 style={{ fontSize: '1.5rem', fontWeight: 'bolder' }}>Automação / Etapas</h1>
   );
 }

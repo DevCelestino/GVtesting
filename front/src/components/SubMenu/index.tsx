@@ -53,11 +53,11 @@ export const SubMenu = ({ data, canOpen, checkActives }: any) => {
         }
         className="flex h-0 flex-col pl-14 text-[0.8rem] font-normal overflow-hidden"
       >
-        {data.menus?.map((menu: any) => (
+        {data.menus?.map((menu: any, index: any) => (
           <li key={menu}>
             <NavLink
               to={`/${removeAccents(data.name).toLowerCase().replace(' ', '')}/${removeAccents(menu).toLowerCase().replace(' ', '')}`}
-              className="link !bg-transparent !gap-x-2"
+              className={`link !bg-transparent !gap-x-2${index === (data.menus?.length - 1) ? ' !pb-2.5' : ''}`}
               onClick={() => setClickSubMenu(!clickSubMenu)}
             >
               {menu === 'Funcionalidades' && (

@@ -86,10 +86,10 @@ export const Inscricao: React.FC = () => {
   return (
     <>
       <div className="flex items-center pb-10">
-        <h1 className="pr-5">Ferramentas / Inscrição</h1>
+        <h1 className="pr-5" style={{ fontSize: '1.5rem', fontWeight: 'bolder' }}>Ferramentas / Inscrição</h1>
         <div className="flex justify-between gap-3">
-          <Button variant="contained" color="warning" className="!font-bold"><PlayArrow className="mr-1" />Rodar automação</Button>
-          <Button variant="contained" color="warning" className="!font-bold"><Save className="mr-1 !w-5" />Salvar</Button>
+          <Button variant="contained" color="warning" style={{ fontWeight: 'bolder' }}><PlayArrow className="mr-1" />Rodar automação</Button>
+          <Button variant="contained" color="warning" style={{ fontWeight: 'bolder' }}><Save className="mr-1 !w-5" />Salvar</Button>
         </div>
       </div>
       <TextField
