@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Tabs, Tab, Typography, Box } from '@mui/material';
-import { FormaDeIngressoForm } from '../FormaDeIngressoForm';
+import { FormaDeIngressoForm } from '../formaDeIngressoForm';
 
 interface IProps {
   tabs: string[],

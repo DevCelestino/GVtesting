@@ -3,7 +3,7 @@ import { NavLink, useLocation } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
 import { motion } from "framer-motion";
 
-import { SubMenu } from "../SubMenu";
+import { SubMenu } from "../subMenu";
 
 // * React icons
 import { IoIosArrowBack } from "react-icons/io";

@@ -1,5 +1,5 @@
 import { Navigate, Route, Routes } from "react-router-dom";
-import { RootLayout } from "./layouts/RootLayout";
+import { RootLayout } from "./layouts/rootLayout";
 import { Dashboard, Funcionalidades, Cenarios, Etapas, ObjetosDePagina, Cadastro, Inscricao, Configuracoes } from "./pages";
 import { ThemeButton } from "./components";
 
