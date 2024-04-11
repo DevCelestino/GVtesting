@@ -9,6 +9,10 @@ services:
     volumes:
       - ../front:/app
       - ../back:/api
+<<<<<<< HEAD
       - C:/Testes:/tests
+=======
+      - C:/Testes/AutomacaoFuncional:/tests
+>>>>>>> e24f474181a086ceb1d0a563ba56f4ea8331f86f
     ports:
       - '3000:3000'
