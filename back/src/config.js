@@ -1,6 +1,6 @@
 var globalEnv = {
   APP_URL: 'http://localhost:3000/',
-  PATH_TESTES: 'C:/Testes/AutomacaoFuncional'
+  PATH_TESTES: '/tests'
 }
 
 if (globalEnv.APP_URL.endsWith('/')) {

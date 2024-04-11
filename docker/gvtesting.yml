@@ -1,0 +1,14 @@
+version: '3'
+
+name: 'gvtesting'
+
+services:
+  gvtesting:
+    image: gvtesting
+    container_name: gvtesting
+    volumes:
+      - ../front:/app
+      - ../back:/api
+      - C:/Testes/AutomacaoFuncional:/tests
+    ports:
+      - '3000:3000'
