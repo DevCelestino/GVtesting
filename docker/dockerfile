@@ -1,0 +1,9 @@
+FROM alpine:3.18
+EXPOSE 3000
+
+VOLUME /app /api /tests
+
+RUN apk add --update nodejs npm
+
+CMD cd /app && npm i && npm start \
+  cd /api && npm i && npm start
