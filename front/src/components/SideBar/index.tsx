@@ -68,7 +68,7 @@ export const Sidebar = () => {
     {
       name: "Automação",
       icon: TbAutomaticGearbox,
-      menus: ["Funcionalidades", "Cenários", "Etapas", "Objetos de Página"],
+      menus: ["Cenários", "Etapas", "Objetos de Página"],
     },
   ];
 
@@ -92,10 +92,9 @@ export const Sidebar = () => {
         variants={Nav_animation}
         initial={{ x: isTabletMid ? -250 : 0 }}
         animate={open ? "open" : "closed"}
-        className="navbar shadow-xl z-[999] max-w-[16rem]  w-[16rem] 
-          overflow-hidden md:relative fixed h-screen"
+        className="navbar shadow-xl z-[999] max-w-[16rem] w-[16rem] overflow-hidden md:relative fixed h-screen"
       >
-        <div className="flex items-center gap-3 font-medium border-b py-3 border-slate-300  mx-3">
+        <div className="flex items-center gap-3 font-black border-b py-3 border-slate-300 mx-3">
           <img
             src="https://img.icons8.com/color/512/firebase.png"
             width={45}
@@ -105,13 +104,13 @@ export const Sidebar = () => {
         </div>
 
         <div className="flex flex-col  h-full" onClick={() => setReloadSubList(!reloadSubList)}>
-          <ul className="whitespace-pre px-2.5 text-[0.9rem] py-2.5 flex flex-col gap-1  font-medium overflow-x-hidden md:h-[68%] h-[70%]">
+          <ul className="whitespace-pre px-2.5 text-[0.9rem] py-2.5 flex flex-col gap-1 overflow-x-hidden md:h-[68%] h-[70%]">
             <li
               className="pb-2.5"
             >
               <NavLink
                 to={"/dashboard"}
-                className="link"
+                className="link font-extrabold"
               >
                 <TbReportAnalytics size={23} className="min-w-max" />
                 Dashboard

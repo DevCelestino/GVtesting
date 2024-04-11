@@ -9,16 +9,18 @@
   html {
     @apply font-Montserrat;
   }
+
   body {
     background: #f1f1f1;
   }
+
   h1 {
     @apply text-xl font-medium capitalize;
   }
 }
 
 * {
-  font-family: 'TildaSans',Arial,sans-serif !important;
+  font-family: 'TildaSans', Arial, sans-serif !important;
 }
 
 button.ToggleTheme {
@@ -27,6 +29,7 @@ button.ToggleTheme {
   span {
     margin: 0px;
   }
+
   svg {
     color: #f1f1f1;
   }
@@ -34,15 +37,6 @@ button.ToggleTheme {
 
 button.ToggleTheme:hover {
   background-color: #3a3c3f;
-}
-
-.navbar {
-  .link.active {
-    background-color: #fee7db;
-  }
-  .link.active, .link.active > p, .link.active > svg {
-    color: #ed6c02;
-  }
 }
 
 button.Mui-selected {
@@ -57,12 +51,24 @@ span.MuiCheckbox-root svg {
   color: #ed6c02;
 }
 
-.link {
-  @apply p-2.5 flex rounded-md gap-6 items-center md:cursor-pointer cursor-default duration-300 font-medium;
-}
+.navbar {
+  .active {
+    background-color: #fee7db;
+    color: #ed6c02;
+  }
 
-.active {
-  @apply bg-blue-100 text-blue-600;
+  .link,
+  .sublink {
+    @apply p-2.5 flex rounded-md gap-6 items-center md:cursor-pointer duration-300;
+  }
+
+  .link {
+    @apply font-extrabold text-lg;
+  }
+
+  .sublink {
+    @apply font-medium text-sm;
+  }
 }
 
 ::-webkit-scrollbar {
@@ -86,21 +92,38 @@ span.MuiCheckbox-root svg {
 /* Tema Dark */
 .dark {
   background: #18191a;
-  
-  span, a, p, svg, h1, h2, h3, h4, h5, h6, button {
+
+  span,
+  a,
+  p,
+  svg,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  button {
     color: #f1f1f1;
   }
 
-  textarea, input, textarea:focus, input:focus {
+  textarea,
+  input,
+  textarea:focus,
+  input:focus {
     color: #f1f1f1;
   }
 
   button.ToggleTheme {
     background-color: #f1f1f1;
-  
+
     svg {
       color: #000;
     }
+  }
+
+  button.ToggleTheme:hover {
+    background-color: #b5b5b5;
   }
 
   div.MuiPaper-root {
@@ -109,6 +132,10 @@ span.MuiCheckbox-root svg {
     li {
       color: #f1f1f1;
     }
+  }
+
+  div.MuiBox-root {
+    border-color: #7f7f7f;
   }
 
   div.MuiFormControl-root.MuiTextField-root {
@@ -122,7 +149,7 @@ span.MuiCheckbox-root svg {
 
     div.MuiInputBase-root {
       background-color: #3a3b3c;
-  
+
       fieldset {
         border-color: #696969;
       }
@@ -158,25 +185,29 @@ span.MuiCheckbox-root svg {
       border-color: #d32f2f;
     }
   }
-  
+
   .navbar {
     background: #3a3c3f;
     border-right-width: thin;
     border-right-color: #3a3c3f;
-  
-    .link.active {
+
+    .active {
       background-color: #6a6a6a;
+
+      * {
+        color: #ed6c02;
+      }
     }
   }
 
   ::-webkit-scrollbar-track {
     background: #4b4d51;
   }
-  
+
   ::-webkit-scrollbar-thumb {
     background: #afafaf;
   }
-  
+
   ::-webkit-scrollbar-thumb:hover {
     background: #a2a2a2;
   }
