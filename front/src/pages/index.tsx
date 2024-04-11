@@ -1,5 +1,4 @@
 export * from './dashboard';
-export * from './automacao/funcionalidades';
 export * from './automacao/cenarios';
 export * from './automacao/etapas';
 export * from './automacao/objetosDePagina';

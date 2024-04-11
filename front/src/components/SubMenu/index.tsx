@@ -3,9 +3,8 @@ import { NavLink, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 
 import { IoIosArrowDown } from "react-icons/io";
-import { RiFunctionLine } from "react-icons/ri";
-import { MdOutlineFeaturedPlayList } from "react-icons/md";
 import { BsBarChartSteps } from "react-icons/bs";
+import { MdOutlineFeaturedPlayList } from "react-icons/md";
 import { MdDataObject } from "react-icons/md";
 import { MdOutlineContactPage } from "react-icons/md";
 import { GoPersonAdd } from "react-icons/go";
@@ -57,12 +56,9 @@ export const SubMenu = ({ data, canOpen, checkActives }: any) => {
           <li key={menu}>
             <NavLink
               to={`/${removeAccents(data.name).toLowerCase().replace(' ', '')}/${removeAccents(menu).toLowerCase().replace(' ', '')}`}
-              className={`link !bg-transparent !gap-x-2${index === (data.menus?.length - 1) ? ' !pb-2.5' : ''}`}
+              className={`sublink !bg-transparent !gap-x-2${index === (data.menus?.length - 1) ? ' !pb-2.5' : ''}`}
               onClick={() => setClickSubMenu(!clickSubMenu)}
             >
-              {menu === 'Funcionalidades' && (
-                <RiFunctionLine size={15} className="min-w-max" />
-              )}
               {menu === 'Cenários' && (
                 <MdOutlineFeaturedPlayList size={15} className="min-w-max" />
               )}

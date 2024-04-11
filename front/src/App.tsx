@@ -1,6 +1,6 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 import { RootLayout } from "./layouts/rootLayout";
-import { Dashboard, Funcionalidades, Cenarios, Etapas, ObjetosDePagina, Cadastro, Inscricao, Configuracoes } from "./pages";
+import { Dashboard, Cenarios, Etapas, ObjetosDePagina, Cadastro, Inscricao, Configuracoes } from "./pages";
 import { ThemeButton } from "./components";
 
 function App() {
@@ -11,8 +11,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Navigate to="/dashboard" />} />
           <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/automacao" element={<Navigate to="/automacao/funcionalidades" />} />
-          <Route path="/automacao/funcionalidades" element={<Funcionalidades />} />
+          <Route path="/automacao" element={<Navigate to="/automacao/cenarios" />} />
           <Route path="/automacao/cenarios" element={<Cenarios />} />
           <Route path="/automacao/etapas" element={<Etapas />} />
           <Route path="/automacao/objetosdepagina" element={<ObjetosDePagina />} />

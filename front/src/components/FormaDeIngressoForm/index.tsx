@@ -110,6 +110,7 @@ export const FormaDeIngressoForm: React.FC<IProps> = ({ inscricaoData }) => {
 
   const handleTipoDocumentoChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setDocumento('');
+    setValidDocumento(true);
     inscricaoData.FormaDeIngresso.Documento.Valor = '';
 
     inscricaoData.FormaDeIngresso.TipoDeDocumento = event.target.value;
@@ -119,6 +120,7 @@ export const FormaDeIngressoForm: React.FC<IProps> = ({ inscricaoData }) => {
   const handleRandomizarDocumentoChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.checked) {
       setDocumento('');
+      setValidDocumento(true);
       inscricaoData.FormaDeIngresso.Documento.Valor = '';
     }
 
@@ -133,6 +135,9 @@ export const FormaDeIngressoForm: React.FC<IProps> = ({ inscricaoData }) => {
 
     if (tipoDocumento === 'CPF') {
       value = FormatarCPF(value);
+      if (value.length === 14) {
+        validateDocumento(value);
+      }
     }
 
     setDocumento(value);
@@ -271,7 +276,7 @@ export const FormaDeIngressoForm: React.FC<IProps> = ({ inscricaoData }) => {
             alignItems: 'center'
           }}
         >
-          <div style={{ position: 'relative' }}>
+          <div style={{ position: 'relative', width: '100%' }}>
             <TextField
               disabled={randomizarDocumento}
               value={documento}
@@ -358,7 +363,7 @@ export const FormaDeIngressoForm: React.FC<IProps> = ({ inscricaoData }) => {
             alignItems: 'center'
           }}
         >
-          <div style={{ position: 'relative' }}>
+          <div style={{ position: 'relative', width: '100%' }}>
             <TextField
               disabled={randomizarEMail}
               value={eMail}
@@ -402,7 +407,7 @@ export const FormaDeIngressoForm: React.FC<IProps> = ({ inscricaoData }) => {
             alignItems: 'center'
           }}
         >
-          <div style={{ position: 'relative' }}>
+          <div style={{ position: 'relative', width: '100%' }}>
             <TextField
               disabled={randomizarTelefone}
               value={telefone}
